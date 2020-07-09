@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="application.ZergController">
+   <children>
+      <Pane prefHeight="400.0" prefWidth="400.0">
+         <children>
+            <TextField alignment="CENTER" layoutX="126.0" layoutY="29.0">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </TextField>
+            <CheckBox layoutX="14.0" layoutY="29.0" mnemonicParsing="false" text="Injects">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </CheckBox>
+            <TextField alignment="CENTER" layoutX="126.0" layoutY="89.0">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </TextField>
+            <CheckBox layoutX="13.0" layoutY="89.0" mnemonicParsing="false" text="Creep Tumors">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </CheckBox>
+            <TextField alignment="CENTER" layoutX="126.0" layoutY="145.0">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </TextField>
+            <CheckBox layoutX="13.0" layoutY="145.0" mnemonicParsing="false" text="Queen">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </CheckBox>
+         </children>
+         <opaqueInsets>
+            <Insets right="5.0" />
+         </opaqueInsets>
+      </Pane>
+   </children>
+</AnchorPane>
