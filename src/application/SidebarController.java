@@ -1,8 +1,11 @@
 package application;
 	
 import java.io.IOException;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicLong;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -10,15 +13,23 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 
 public class SidebarController extends Application {
 	
 	@FXML BorderPane borderpane;
 	
+    private final AtomicBoolean running = new AtomicBoolean(false);	
+    private final AtomicLong timeCounter = new AtomicLong(0);
+	private Thread thread;
+
+	@FXML Label timer;
+	
+	@Override
 	public void start(Stage primaryStage) {
 		try {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getClassLoader().getResource("Sidebar.fxml"));
-			Scene scene = new Scene(root,800,600);	
+			Scene scene = new Scene(root,600,400);	
 			scene.getStylesheets().add("application.css");
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -32,65 +43,68 @@ public class SidebarController extends Application {
 	}
 	
 	@FXML void start(MouseEvent event) {
-    	System.out.println("Hello World");
+		this.running.set(true);
+		
+		thread = new Thread(){
+			@Override
+			public void run(){
+				while (running.get()) {
+					updateUILabelAsynchronous(timeCounter.toString());
+					timeCounter.addAndGet(1);
+
+					try {
+						sleep(1000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		};
+		
+		thread.start();
 
     }
+		
+		private void updateUILabelAsynchronous(String newValue) {
+			Platform.runLater( () -> { timer.setText(newValue); } );				
+		}
+		
 
     @FXML void stop(MouseEvent event) {
-    	System.out.println("Hello World");
+    	this.running.set(false);
+    	updateUILabelAsynchronous("0");	
     }
 	
     @FXML void openPreferences(MouseEvent event) {
-    	Pane root = null;
-    	try {
-			root = (Pane)FXMLLoader.load(getClass().getClassLoader().getResource("PreferencesControls.fxml"));
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	borderpane.setCenter(root);
+    	loadCenterPane("PreferencesControls.fxml");
     }
 
     @FXML void openProtoss(MouseEvent event) {
-    	Pane root = null;
-    	try {
-			root = (Pane)FXMLLoader.load(getClass().getClassLoader().getResource("ProtossControls.fxml"));
-
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	borderpane.setCenter(root);
+    	loadCenterPane("ProtossControls.fxml");
     }
 
     @FXML void openTerran(MouseEvent event) {
-    	Pane root = null;
-    	try {
-			root = (Pane)FXMLLoader.load(getClass().getClassLoader().getResource("TerranControls.fxml"));
+    	loadCenterPane("TerranControls.fxml");
 
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	
-    	borderpane.setCenter(root);
     }
 
     @FXML void openZerg(MouseEvent event) {
-   	
+    	loadCenterPane("ZergControls.fxml");
+    }    
+    
+    private void loadCenterPane(String name) {
+       	
     	Pane root = null;
     	try {
-			root = (Pane)FXMLLoader.load(getClass().getClassLoader().getResource("ZergControls.fxml"));
+			root = (Pane)FXMLLoader.load(getClass().getClassLoader().getResource(name));
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
     	
-    	borderpane.setCenter(root);
-    }    
+    	borderpane.setCenter(root);    	
+    }
     
 }
