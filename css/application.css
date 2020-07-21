@@ -12,3 +12,14 @@
 .menuPane{
 -fx-background-color :  #303030;
 }
+
+.txtInjects{
+  -fx-padding: 5 5 5 5;
+}
+
+.directory{
+	-fx-alignment: center-left;
+}
+.number{
+	-fx-alignment: center;
+}

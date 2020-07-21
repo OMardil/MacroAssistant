@@ -8,16 +8,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SidebarController">
+<BorderPane fx:id="borderpane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.SidebarController">
    <left>
-      <VBox prefHeight="360.0" prefWidth="150.0" styleClass="menuPane" stylesheets="@../css/application.css" BorderPane.alignment="CENTER">
+      <VBox prefHeight="400.0" prefWidth="150.0" styleClass="menuPane" stylesheets="@../css/application.css" BorderPane.alignment="CENTER">
          <children>
             <HBox prefHeight="40.0" prefWidth="200.0">
                <children>
-                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" />
+                  <ImageView fitHeight="40.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../img/preferences.png" />
+                     </image></ImageView>
                   <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#openPreferences" prefHeight="40.0" prefWidth="100.0" stylesheets="@../css/application.css" text="Preferences">
                      <font>
                         <Font size="14.0" />
@@ -116,4 +120,7 @@
          </children>
       </VBox>
    </left>
+   <center>
+      <Pane prefHeight="400.0" prefWidth="850.0" BorderPane.alignment="CENTER" />
+   </center>
 </BorderPane>

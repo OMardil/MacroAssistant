@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,38 +9,32 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.ZergController">
    <children>
-      <Pane prefHeight="400.0" prefWidth="500.0">
+      <Pane prefHeight="400.0" prefWidth="850.0">
          <children>
-            <TextField alignment="CENTER" layoutX="126.0" layoutY="29.0" text="25">
-               <padding>
-                  <Insets bottom="10.0" top="10.0" />
-               </padding>
-            </TextField>
-            <CheckBox layoutX="14.0" layoutY="29.0" mnemonicParsing="false" text="Injects">
+            <CheckBox layoutX="17.0" layoutY="26.0" mnemonicParsing="false" text="Injects">
                <padding>
                   <Insets bottom="10.0" top="10.0" />
                </padding>
             </CheckBox>
-            <TextField alignment="CENTER" layoutX="126.0" layoutY="89.0" text="11">
-               <padding>
-                  <Insets bottom="10.0" top="10.0" />
-               </padding>
-            </TextField>
-            <CheckBox layoutX="13.0" layoutY="89.0" mnemonicParsing="false" text="Creep Tumors">
-               <padding>
-                  <Insets bottom="10.0" top="10.0" />
-               </padding>
-            </CheckBox>
-            <TextField alignment="CENTER" layoutX="126.0" layoutY="145.0" text="40">
-               <padding>
-                  <Insets bottom="10.0" top="10.0" />
-               </padding>
-            </TextField>
-            <CheckBox layoutX="13.0" layoutY="145.0" mnemonicParsing="false" text="Overlords">
+            <TextField alignment="CENTER" layoutX="126.0" layoutY="29.0" prefHeight="30.0" prefWidth="50.0" styleClass="number" stylesheets="@../css/application.css" text="25" />
+            <TextField fx:id="txtInjects" disable="true" editable="false" layoutX="176.0" layoutY="29.0" prefHeight="30.0" prefWidth="570.0" styleClass="directory" stylesheets="@../css/application.css" />
+            <Button fx:id="btnInjects" layoutX="746.0" layoutY="29.0" mnemonicParsing="false" onMouseClicked="#popupFileDirectory" prefHeight="30.0" prefWidth="35.0" text="..." />
+            <CheckBox layoutX="17.0" layoutY="86.0" mnemonicParsing="false" text="Creep Tumors">
                <padding>
                   <Insets bottom="10.0" top="10.0" />
                </padding>
             </CheckBox>
+            <TextField layoutX="126.0" layoutY="89.0" prefHeight="30.0" prefWidth="50.0" styleClass="number" stylesheets="@../css/application.css" text="11" />
+            <TextField fx:id="txtCreepTumors" disable="true" editable="false" layoutX="176.0" layoutY="89.0" prefHeight="30.0" prefWidth="570.0" styleClass="directory" stylesheets="@../css/application.css" />
+            <Button fx:id="btnCreepTumors" layoutX="746.0" layoutY="89.0" mnemonicParsing="false" onMouseClicked="#popupFileDirectory" prefHeight="30.0" prefWidth="35.0" text="..." />
+            <CheckBox layoutX="17.0" layoutY="142.0" mnemonicParsing="false" text="Overlords">
+               <padding>
+                  <Insets bottom="10.0" top="10.0" />
+               </padding>
+            </CheckBox>
+            <TextField alignment="CENTER" layoutX="126.0" layoutY="145.0" prefHeight="30.0" prefWidth="50.0" styleClass="number" stylesheets="@../css/application.css" text="40" />
+            <TextField fx:id="txtOverlords" disable="true" editable="false" layoutX="176.0" layoutY="145.0" prefHeight="30.0" prefWidth="570.0" styleClass="directory" stylesheets="@../css/application.css" />
+            <Button fx:id="btnOverlords" layoutX="746.0" layoutY="145.0" mnemonicParsing="false" onMouseClicked="#popupFileDirectory" prefHeight="30.0" prefWidth="35.0" text="..." />
          </children>
          <opaqueInsets>
             <Insets right="5.0" />

@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import javafx.scene.control.Label;
 public class SidebarController extends Application {
 	
 	@FXML BorderPane borderpane;
+	@FXML Pane centerPane;
 	
     private final AtomicBoolean running = new AtomicBoolean(false);	
     private final AtomicLong timeCounter = new AtomicLong(0);
@@ -29,7 +31,7 @@ public class SidebarController extends Application {
 	public void start(Stage primaryStage) {
 		try {
 			BorderPane root = (BorderPane)FXMLLoader.load(getClass().getClassLoader().getResource("Sidebar.fxml"));
-			Scene scene = new Scene(root,600,400);	
+			Scene scene = new Scene(root,1000,400);	
 			scene.getStylesheets().add("application.css");
 			primaryStage.setScene(scene);
 			primaryStage.show();
@@ -50,6 +52,7 @@ public class SidebarController extends Application {
 			public void run(){
 				while (running.get()) {
 					updateUILabelAsynchronous(timeCounter.toString());
+					playSounds();
 					timeCounter.addAndGet(1);
 
 					try {
@@ -66,11 +69,14 @@ public class SidebarController extends Application {
 
     }
 		
-		private void updateUILabelAsynchronous(String newValue) {
-			Platform.runLater( () -> { timer.setText(newValue); } );				
-		}
-		
+	private void playSounds() {
+		//long[] controls = 
+	}
 
+	private void updateUILabelAsynchronous(String newValue) {
+		Platform.runLater( () -> { timer.setText(newValue); } );
+	}
+		
     @FXML void stop(MouseEvent event) {
     	this.running.set(false);
     	updateUILabelAsynchronous("0");	
@@ -94,17 +100,14 @@ public class SidebarController extends Application {
     }    
     
     private void loadCenterPane(String name) {
-       	
-    	Pane root = null;
-    	try {
-			root = (Pane)FXMLLoader.load(getClass().getClassLoader().getResource(name));
+       	try {
+    		centerPane = (Pane)FXMLLoader.load(getClass().getClassLoader().getResource(name));
+    		borderpane.setRight(centerPane);
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-    	
-    	borderpane.setCenter(root);    	
     }
     
 }
