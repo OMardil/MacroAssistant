@@ -20,7 +20,6 @@ public class ZergController {
 	@FXML Button btnOverlords;
 	
 	public ZergController(){
-		System.out.println("Hola");
 	}
 
 	@FXML public void popupFileDirectory(MouseEvent event) {

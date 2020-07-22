@@ -1,13 +1,21 @@
 package application;
 	
+import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -52,7 +60,18 @@ public class SidebarController extends Application {
 			public void run(){
 				while (running.get()) {
 					updateUILabelAsynchronous(timeCounter.toString());
-					playSounds();
+					try {
+						playSounds();
+					} catch (LineUnavailableException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (UnsupportedAudioFileException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 					timeCounter.addAndGet(1);
 
 					try {
@@ -69,8 +88,16 @@ public class SidebarController extends Application {
 
     }
 		
-	private void playSounds() {
-		//long[] controls = 
+	private void playSounds() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+	    AudioInputStream audioInputStream =  AudioSystem.getAudioInputStream(new File("audio_files\\inject.aiff").getAbsoluteFile()); 
+          
+        // create clip reference 
+        Clip clip = AudioSystem.getClip(); 
+          
+        // open audioInputStream to the clip 
+        clip.open(audioInputStream); 
+        clip.start();
+          
 	}
 
 	private void updateUILabelAsynchronous(String newValue) {
@@ -83,25 +110,30 @@ public class SidebarController extends Application {
     }
 	
     @FXML void openPreferences(MouseEvent event) {
-    	loadCenterPane("PreferencesControls.fxml");
+    	loadCenterPane("Preferences.fxml");
     }
 
     @FXML void openProtoss(MouseEvent event) {
-    	loadCenterPane("ProtossControls.fxml");
+    	loadCenterPane("Protoss.fxml");
     }
 
     @FXML void openTerran(MouseEvent event) {
-    	loadCenterPane("TerranControls.fxml");
+    	loadCenterPane("Terran.fxml");
 
     }
 
     @FXML void openZerg(MouseEvent event) {
-    	loadCenterPane("ZergControls.fxml");
+    	loadCenterPane("Zerg.fxml");
     }    
     
     private void loadCenterPane(String name) {
        	try {
-    		centerPane = (Pane)FXMLLoader.load(getClass().getClassLoader().getResource(name));
+            //FXMLLoader loader = new FXMLLoader(getClass().getResource(name));    		
+            FXMLLoader loader = FXMLLoader.load(getClass().getClassLoader().getResource(name));	
+            Parent root = loader.load();            
+            
+            centerPane = (Pane)loader.load();
+            //centerPane = (Pane)FXMLLoader.load(getClass().getClassLoader().getResource(name));
     		borderpane.setRight(centerPane);
 
 		} catch (IOException e) {
