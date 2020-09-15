@@ -2,6 +2,7 @@ package application;
 	
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -128,12 +129,8 @@ public class SidebarController extends Application {
     
     private void loadCenterPane(String name) {
        	try {
-            //FXMLLoader loader = new FXMLLoader(getClass().getResource(name));    		
-            FXMLLoader loader = FXMLLoader.load(getClass().getClassLoader().getResource(name));	
-            Parent root = loader.load();            
-            
-            centerPane = (Pane)loader.load();
-            //centerPane = (Pane)FXMLLoader.load(getClass().getClassLoader().getResource(name));
+
+            centerPane = (Pane)FXMLLoader.load(getClass().getClassLoader().getResource(name));
     		borderpane.setRight(centerPane);
 
 		} catch (IOException e) {

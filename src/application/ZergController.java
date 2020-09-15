@@ -7,10 +7,11 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Button;
 
-public class ZergController {
+public class ZergController extends Pane{
 
 	@FXML TextField txtInjects;
 	@FXML TextField txtCreepTumors;
